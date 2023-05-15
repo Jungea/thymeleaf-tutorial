@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<h1>Sign Up</h1>
+<form th:object="${signUpForm}" method="post">
+    <h3>input</h3>
+    * : <input type="text" th:field="*{firstName}" /> <br/>
+    $ : <input type="text" th:field="${signUpForm.lastName}" /> <br/>
+
+    <h3>checkbox</h3>
+    <input type="checkbox" th:field="*{policyAgree}" />
+    <label th:for="${#ids.prev('policyAgree')}">checkbox</label>
+
+    <h3>radio</h3>
+    <ul>
+        <li th:each="genderType : ${allGenders}">
+            <input type="radio" th:field="*{gender}" th:value="${genderType.code}" />
+            <label th:for="${#ids.prev('gender')}" th:text="${genderType.name}">gender</label>
+        </li>
+    </ul>
+
+    <h3>select</h3>
+    <select th:field="*{phoneNumber1}">
+        <option th:each="phoneNumber1Type : ${allPhoneNumber1s}"
+                th:value="${phoneNumber1Type}"
+                th:text="${phoneNumber1Type}">phoneNumber1</option>
+    </select>
+
+</form>
+
+</body>
+</html>
